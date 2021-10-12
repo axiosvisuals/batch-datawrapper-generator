@@ -1,6 +1,6 @@
 # batch-datawrapper-generator
 
-This repository contains R scripts for batch chart and map creation using the Datawrapper API via the `DatawRappr` package. While the API does support generating a chart or map from scratch, this workflow assumes you are cloning an exisiting chart already created in Datawrapper.
+This repository contains R scripts for batch chart and map creation using the Datawrapper API via the `DatawRappr` package. While the API does support generating a chart or map from scratch, this workflow assumes you are duplicating an exisiting chart already created in Datawrapper.
 
 A complete list of [DatawRappr functions can be found here](https://munichrocker.github.io/DatawRappr/reference/index.html).
 
@@ -8,7 +8,7 @@ A complete list of [DatawRappr functions can be found here](https://munichrocker
 
 - R, along with `DatawRappr` and `dplyr`
 - A [Datwrapper API-token](https://app.datawrapper.de/account/api-tokens)
-- The id of the chart you are cloning
+- The id of the chart you are duplicating
 
 ## Getting started
 
