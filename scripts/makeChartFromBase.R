@@ -66,7 +66,6 @@ if (length(Sys.getenv("DW_KEY"))) {
   for (df in data_list) {
     
     series_id <- df[1,]$series_id
-    print(series_id)
     row <- deployChart(
       chart_data = df,
       series_id
@@ -77,7 +76,7 @@ if (length(Sys.getenv("DW_KEY"))) {
   
   reference_df <- bind_rows(reference_list)
 
-  write.csv(reference_df, "reference.csv", row.names=FALSE)
+  write.csv(reference_df, "reference_output.csv", row.names=FALSE)
   
 } else {
   message('Datawrapper token not set. Set by running datawrapper_auth(api_key = "12345678")')
