@@ -12,13 +12,9 @@ A complete list of [DatawRappr functions can be found here](https://munichrocker
 
 ## Getting started
 
-You can either copy this repo using degit and place your data there or simply reference a local version of one of the scripts. Note, due to some limited functionality within `DatawRappr`, a few Bash scripts are used to call the API directly, so if you are not copying the entire repo make sure to include this file as well.
+You can either copy this repo using degit and place your data there or simply reference a local versions of the scripts. Note, due to some limited functionality within `DatawRappr`, a few Bash scripts are used to call the API directly, so if you are not copying the entire repo make sure to include these files as well.
 
-The script outputs a csv containing the public urls for each file to your working directory. To set the working directory to the script location, run:
-
-```r
-setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
-```
+The scripts output a csv containing the public urls for each file to your working directory.
 
 ### Using degit
 
