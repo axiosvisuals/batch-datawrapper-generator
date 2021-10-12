@@ -20,7 +20,7 @@ The script outputs a csv containing the public urls for each file to your workin
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 ```
 
-#### Using degit
+### Using degit
 
 `degit` is a package that makes copies of a git repository's most recent commit. This allows for generating the scaffolding from this template directly from the command line. 
 
@@ -35,7 +35,7 @@ npx degit axiosvisuals/batch-datawrapper-generator --mode=git project-name
 cd project-name
 ```
 
-#### Preparing your data
+### Preparing your data
 
 Your data should be formatted the same way as the data in your base chart with the addition of a `series_id` field. This value indicates the group – most likely a local – the row belongs to. The script uses the `series_id` value to split the dataset into chunks.
 
@@ -48,7 +48,7 @@ Your data should be formatted the same way as the data in your base chart with t
 | Group C   | Agree    | 1507 | 394   |
 | Group C   | Disagree | 266  | 1030  |
 
-#### Preparing your base graphic
+### Preparing your base graphic
 
 Copied charts retain any style and textual information, so make sure your base graphic looks the way you want your published versions to appear. If you need to dynamically change the styles of a graphic, add additional arguments to `dw_edit_chart()`  within `deployChart()`.
 
@@ -56,11 +56,11 @@ Using the `series_id` value, the name of the group can be inserted in the graphi
 
 ![alt text](https://user-images.githubusercontent.com/15233857/136981359-a43005e8-b41d-414a-922c-b15af6b9987b.png)
 
-###### Creating localized maps from national map
+##### Creating localized maps from national map
 
 If you are creating zoomed in versions of a national map, an efficient method is to include the entire national dataset in your base graphic and then instead of updating the data, simply change the basemap id. While every duplicated map will contain the entire dataset, it will only render those with matching FIPS codes. An example of this workflow is in `makeLocalMapsFromNational.R`.
 
-#### API token set-up
+### API token set-up
 
 The first time you use `DatawRappr` you will need to autheniticate your API token. Start an R session either in the terminal or RStudio. Copy the API token [created in Datawrapper]() and use
 
@@ -77,13 +77,13 @@ To make sure, your key is working as expected, you can run
 > dw_test_key()
 ```
 
-#### Running the scripts
+### Running the scripts
 
 The scripts are designed to be run from the command line but can easily be modified to run in RStudio.
 
 ***
 
-###### makeChartFromBase.R
+##### makeChartFromBase.R
 
 This script duplicates an exisiting chart and replaces the data, along with any templated hed, and dek values, publishes each chart, and returns a table containing the public urls. It takes two required arguments and an optional third.
 
@@ -102,7 +102,7 @@ Rscript makeChartFromBase.R base_chart_id "path/to/data.csv" [group_name|group_f
 
 ***
 
-###### makeLocalMapsFromNational.R
+##### makeLocalMapsFromNational.R
 
 This script duplicates an existing map, updates the basemap, along with any templated hed, and dek values, publishes each chart, and returns a table containing the public urls. It takes two required arguments and an option third.
 
@@ -127,7 +127,7 @@ Rscript makeChartFromBase.R base_chart_id "path/to/locals.csv" [group_name|group
 
 ***
 
-###### deleteChartsInReference.R
+##### deleteChartsInReference.R
 
 This script deletes all of the charts referenced by `chart_id` in a csv file.
 
@@ -136,5 +136,3 @@ Run script:
 ```
 Rscript deleteChartsInReference.R "path/to/reference_output.csv"
 ```
-
-###### 
