@@ -75,7 +75,7 @@ To make sure, your key is working as expected, you can run
 
 ### Running the scripts
 
-The scripts are designed to be run from the command line but can easily be modified to run in RStudio.
+The scripts are designed to be run from the command line <mark>and assume the project folder is the directory</mark>, but can easily be modified to run in RStudio.
 
 ***
 
@@ -93,7 +93,7 @@ This script duplicates an exisiting chart and replaces the data, along with any 
 Run script:
 
 ```
-Rscript makeChartFromBase.R base_chart_id "path/to/data.csv" [group_name|group_folder_id]
+Rscript scripts/makeChartFromBase.R base_chart_id "path/to/data.csv" [group_name|group_folder_id]
 ```
 
 ***
@@ -118,7 +118,7 @@ If you need to make a map containing a custom geography, replace `basemap_id` wi
 Run script:
 
 ```
-Rscript makeChartFromBase.R base_chart_id "path/to/locals.csv" [group_name|group_folder_id]
+Rscript scripts/makeLocalMapsFromNational.R base_chart_id "path/to/locals.csv" [group_name|group_folder_id]
 ```
 
 ***
@@ -130,5 +130,5 @@ This script deletes all of the charts referenced by `chart_id` in a csv file.
 Run script:
 
 ```
-Rscript deleteChartsInReference.R "path/to/reference_output.csv"
+Rscript scripts/deleteChartsInReference.R "path/to/reference_output.csv"
 ```

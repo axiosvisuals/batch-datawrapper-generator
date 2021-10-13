@@ -1,6 +1,20 @@
 library(dplyr)
 library(DatawRappr)
 
+# library(base)
+# thisFile <- function() {
+#   cmdArgs <- commandArgs(trailingOnly = FALSE)
+#   needle <- "--file="
+#   match <- grep(needle, cmdArgs)
+#   if (length(match) > 0) {
+#     # Rscript
+#     return(normalizePath(sub(needle, "", cmdArgs[match])))
+#   } else {
+#     # 'source'd via R console
+#     return(normalizePath(sys.frames()[[1]]$ofile))
+#   }
+# }
+
 axios_visuals_id <- "xMwlyuwN"
 
 deployChart <- function(series_id, basemap_id) {
@@ -11,7 +25,7 @@ deployChart <- function(series_id, basemap_id) {
   chart_dek = gsub("%series_id%", series_id, base_meta$content$metadata$describe$intro)
 
   chart <- dw_copy_chart(base_chart_id)
-  system(paste("./moveFile.sh", chart$id, group_folder_id, Sys.getenv("DW_KEY"), sep=" "))
+  system(paste("./scripts/moveFile.sh", chart$id, group_folder_id, Sys.getenv("DW_KEY"), sep=" "))
 
   if (basemap_id %in% dw_basemaps$id) {
     dw_edit_chart(
@@ -28,7 +42,7 @@ deployChart <- function(series_id, basemap_id) {
       title = chart_hed,
       intro = chart_dek
     )
-    system(paste("./updateCustomJSON.sh", chart$id, basemap_id, Sys.getenv("DW_KEY"), sep=" "))
+    system(paste("./scripts/updateCustomJSON.sh", chart$id, basemap_id, Sys.getenv("DW_KEY"), sep=" "))
   }
 
   published <- dw_publish_chart(chart$id, return_object = TRUE)
@@ -69,7 +83,6 @@ if (length(Sys.getenv("DW_KEY"))) {
   reference_list <- list()
   
   locals <- read.csv(args[2])
-  print(locals)
   
   for (i in 1:nrow(locals)) {
     

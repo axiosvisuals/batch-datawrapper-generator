@@ -11,7 +11,7 @@ deployChart <- function(chart_data, series_id) {
   chart_dek = gsub("%series_id%", series_id, base_meta$content$metadata$describe$intro)
   
   chart <- dw_copy_chart(base_chart_id)
-  system(paste("./moveFile.sh", chart$id, group_folder_id, Sys.getenv("DW_KEY"), sep=" "))
+  system(paste("./scripts/moveFile.sh", chart$id, group_folder_id, Sys.getenv("DW_KEY"), sep=" "))
     
   
   dw_data_to_chart(chart_data, chart$id)
