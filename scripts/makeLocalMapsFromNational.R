@@ -5,39 +5,42 @@ axios_visuals_id <- "xMwlyuwN"
 
 deployChart <- function(series_id, basemap_id) {
   
+  base_meta <- dw_retrieve_chart_metadata(base_chart_id)
+
+  chart_hed = gsub("%series_id%", series_id, base_meta$content$title)
+  chart_dek = gsub("%series_id%", series_id, base_meta$content$metadata$describe$intro)
+
+  chart <- dw_copy_chart(base_chart_id)
+  system(paste("./moveFile.sh", chart$id, group_folder_id, Sys.getenv("DW_KEY"), sep=" "))
+
   if (basemap_id %in% dw_basemaps$id) {
-    print("yes")
+    dw_edit_chart(
+      chart$id,
+      title = chart_hed,
+      intro = chart_dek,
+      visualize = list(
+        basemap = basemap_id
+      )
+    )
   } else {
-    print(basemap_id)
+    dw_edit_chart(
+      chart$id,
+      title = chart_hed,
+      intro = chart_dek
+    )
+    system(paste("./updateCustomJSON.sh", chart$id, basemap_id, Sys.getenv("DW_KEY"), sep=" "))
   }
-  
-  # base_meta <- dw_retrieve_chart_metadata(base_chart_id)
-  # 
-  # chart_hed = gsub("%series_id%", series_id, base_meta$content$title)
-  # chart_dek = gsub("%series_id%", series_id, base_meta$content$metadata$describe$intro)
-  # 
-  # chart <- dw_copy_chart(base_chart_id)
-  # system(paste("./moveFile.sh", chart$id, group_folder_id, Sys.getenv("DW_KEY"), sep=" "))
-  # 
-  # dw_edit_chart(
-  #   chart$id,
-  #   title = chart_hed,
-  #   intro = chart_dek,
-  #   visualize = list(
-  #     basemap = basemap_id
-  #   )
-  # )
-  # 
-  # published <- dw_publish_chart(chart$id, return_object = TRUE)
-  # 
-  # row <- data.frame(
-  #   series_id = series_id,
-  #   chart_id = chart$id,
-  #   public_url = published$publicUrl,
-  #   public_png = paste('https://datawrapper.dwcdn.net/', chart$id,'/social.png', sep='')
-  # )
-  # 
-  # message('Chart published to ', published$publicUrl)
+
+  published <- dw_publish_chart(chart$id, return_object = TRUE)
+
+  row <- data.frame(
+    series_id = series_id,
+    chart_id = chart$id,
+    public_url = published$publicUrl,
+    public_png = paste('https://datawrapper.dwcdn.net/', chart$id,'/social.png', sep='')
+  )
+
+  message('Chart published to ', published$publicUrl)
   
   return(row)
 }
