@@ -1,4 +1,5 @@
 library(dplyr)
+library(readr)
 library(DatawRappr)
 
 axios_visuals_id <- "xMwlyuwN"
@@ -42,7 +43,7 @@ if (length(Sys.getenv("DW_KEY"))) {
   
   base_chart_id <- args[1]
   
-  data <- read.csv(args[2])
+  data <- read_csv(args[2])
   
   if (length(args)>2) {
     if (grepl("\\D", args[3])) {
@@ -76,7 +77,7 @@ if (length(Sys.getenv("DW_KEY"))) {
   
   reference_df <- bind_rows(reference_list)
 
-  write.csv(reference_df, "reference_output.csv", row.names=FALSE)
+  write_csv(reference_df, "reference_output.csv", row.names=FALSE)
   
 } else {
   message('Datawrapper token not set. Set by running datawrapper_auth(api_key = "12345678")')
