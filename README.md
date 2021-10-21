@@ -30,6 +30,14 @@ To create a new project based on this template using [degit](https://github.com/
 npx degit axiosvisuals/batch-datawrapper-generator --mode=git project-name
 cd project-name
 ```
+### Demo
+You can test out the script with the included dummy data using the following commands. This will duplicate a template chart in the `Axios Visuals/dw auto test` folder in Datawrapper (assuming it wasn't accidentally deleted, update the new charts with the dummy data, and place them in the testing folder.
+
+```
+npx degit axiosvisuals/batch-datawrapper-generator --mode=git project-name
+cd project-name
+Rscript scripts/makeChartFromBase.R mnX0x data/data.csv 76624
+```
 
 ### Preparing your data
 
