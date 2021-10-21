@@ -77,7 +77,7 @@ if (length(Sys.getenv("DW_KEY"))) {
   
   reference_df <- bind_rows(reference_list)
 
-  write_csv(reference_df, "reference_output.csv", row.names=FALSE)
+  write_csv(reference_df, "reference_output.csv")
   
 } else {
   message('Datawrapper token not set. Set by running datawrapper_auth(api_key = "12345678")')
