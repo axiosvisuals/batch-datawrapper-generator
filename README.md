@@ -1,6 +1,6 @@
 # batch-datawrapper-generator
 
-This repository contains R scripts for batch chart and map creation using the Datawrapper API via the `DatawRappr` package. While the API does support generating a chart or map from scratch, this workflow assumes you are duplicating an exisiting chart already created in Datawrapper.
+This repository contains R scripts for batch chart and map creation using the Datawrapper API via the `DatawRappr` package, as well as a Bash script wrapper. While the API does support generating a chart or map from scratch, this workflow assumes you are duplicating an exisiting chart already created in Datawrapper.
 
 A complete list of [DatawRappr functions can be found here](https://munichrocker.github.io/DatawRappr/reference/index.html).
 
@@ -28,15 +28,6 @@ To create a new project based on this template using [degit](https://github.com/
 npx degit axiosvisuals/batch-datawrapper-generator --mode=git project-name
 cd project-name
 ```
-### Demo
-You can test out the script with the included dummy data using the following commands. This will duplicate a template chart in the `Axios Visuals/dw auto test/` folder in Datawrapper (assuming it wasn't accidentally deleted), update the new charts with the dummy data, and place them in the testing folder.
-
-```
-npx degit axiosvisuals/batch-datawrapper-generator --mode=git project-name
-cd project-name
-Rscript scripts/makeChartFromBase.R mnX0x data/data.csv 76624
-```
-
 ### API token set-up
 
 The first time you use `DatawRappr` you will need to autheniticate your API token. Start an R session either in the terminal or RStudio. Copy the API token [created in Datawrapper]() and use
@@ -53,6 +44,31 @@ To make sure, your key is working as expected, you can run
 ```R
 > dw_test_key()
 ```
+
+## Running the scripts
+
+Run `./batch.sh` and follow the prompts. Continue reading for instructions on how to use each script.
+
+### Demo
+
+You can test out the script with the included dummy data. This will duplicate a template chart in the `Axios Visuals/dw auto test/` folder in Datawrapper (assuming it wasn't accidentally deleted), update the new charts with the dummy data, and place them in the testing folder.
+
+- Copy the repo using the `new-project-shell` [script](https://github.com/axiosvisuals/new-project-shell) or with degit
+
+  - ```
+    npx degit axiosvisuals/batch-datawrapper-generator --mode=git project-name
+    cd project-name`
+    ```
+
+- Run `./batch.sh`
+
+- Select `makeChartFromBase.R`
+
+- Pass `mnX0x` for the base chart ID
+
+- Pass `76624` for the folder ID
+
+- View results on [Datawrapper](https://app.datawrapper.de/archive/team/xMwlyuwN/76624)
 
 ### For charts
 
@@ -97,13 +113,9 @@ Copied charts retain any style and textual information, so make sure your base g
 
 Using the `series_id` value, the name of the group can be inserted in the graphic's hed and dek. Use `%series_id%` to indicate where it should be inserted.
 
-### Running the scripts
+## A deeper look at the R scripts
 
-Run `./batch.sh` and follow the prompts.
-
-The following R scripts are designed to be run from the command line indirectly via `batch.sh`.
-
-***
+The following R scripts are designed to be run indirectly via `batch.sh` but can be run from the command line if needed.
 
 ##### makeChartFromBase.R
 
