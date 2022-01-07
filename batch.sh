@@ -7,6 +7,7 @@ select SCRIPT in "${SCRIPTS[@]}"; do
   if [[ "deleteChartsInReference.R" == "${SCRIPT}" ]]
   then
     Rscript scripts/deleteChartsInReference.R "./reference_output.csv"
+    break;
   else
     echo "What is the base chart ID?"
     echo -n "Base chart ID: "
@@ -17,25 +18,16 @@ select SCRIPT in "${SCRIPTS[@]}"; do
     case "$SCRIPT" in
       "makeChartFromBase.R" )
         Rscript scripts/$SCRIPT $BASE_ID "./data/data.csv" $FOLDER
+        break;
         ;;
       "makeLocalMapsFromNational.R" )
         Rscript scripts/$SCRIPT $BASE_ID "./data/locals.csv" $FOLDER
         ;;
       * )
-        echo "Skip making a local git repo. Don't forget to set one up!"
+        echo "Invalid option. Exiting run."
+        break;
         ;;
     esac
   fi
+  exit
 done
-
-
-#
-# echo "Where would you like to save your project? Leave blank to store at root."
-# echo -n "Directory: "
-# read -r path
-# echo "What is the project name? Will default to slug if left blank."
-# echo -n "Name: "
-# read -r name
-# [ -z "$name" ] && name=$slug
-# read -p "Create local git repo (y/n)? " gitChoiceLocal
-# read -p "Create remote git repo (y/n)? Requires GitHub CLI to be installed. " gitChoiceRemote
