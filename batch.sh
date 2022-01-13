@@ -1,10 +1,14 @@
 #!/bin/bash
 
 cd "$(dirname "$0")"
-SCRIPTS=("makeChartFromBase.R" "makeLocalMapsFromNational.R" "deleteChartsInReference.R")
+SCRIPTS=("processXls.R" "makeChartsFromBase.R" "makeLocalMapsFromNational.R" "deleteChartsInReference.R")
 echo "Which script do you want to run?"
 select SCRIPT in "${SCRIPTS[@]}"; do
-  if [[ "deleteChartsInReference.R" == "${SCRIPT}" ]]
+  if [[ "processXls.R" == "${SCRIPT}" ]]
+  then
+    Rscript scripts/processXls.R
+    break;
+  elif [[ "deleteChartsInReference.R" == "${SCRIPT}" ]]
   then
     Rscript scripts/deleteChartsInReference.R "./reference_output.csv"
     break;
@@ -16,7 +20,7 @@ select SCRIPT in "${SCRIPTS[@]}"; do
     echo -n "Folder ID or name: "
     read -r FOLDER
     case "$SCRIPT" in
-      "makeChartFromBase.R" )
+      "makeChartsFromBase.R" )
         Rscript scripts/$SCRIPT $BASE_ID "./data/data.csv" $FOLDER
         break;
         ;;

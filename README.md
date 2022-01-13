@@ -62,7 +62,7 @@ You can test out the script with the included dummy data. This will duplicate a 
 
 - Run `./batch.sh`
 
-- Select `makeChartFromBase.R`
+- Select `makeChartsFromBase.R`
 
 - Pass `mnX0x` for the base chart ID
 
@@ -85,7 +85,9 @@ Your data should be formatted the same way as the data in your base chart with t
 | Group C   | Agree    | 1507 | 394   |
 | Group C   | Disagree | 266  | 1030  |
 
-Paste your data into `data/data.csv`.
+If working from a national file, isolate your data and paste into `data/data.csv`.
+
+If local reporters are filling out the data, clone and use either the [city](https://docs.google.com/spreadsheets/d/1sbAGPCY73Hxa3tQhoALMqbFvats9YxuSnLgRGlsxNBE/edit#gid=0) or [state](https://docs.google.com/spreadsheets/d/1y5dzvUFt_esSur820MTSp72-lp3IcGCIkou1p1-3ew0/edit#gid=0) Google Sheet template. Once complete, download as an Excel file and move it into `data/raw`. Run `./batch.sh` and select `processXls.R`. This will compile to sheets into a single table with the `series_id` prepended and save it to `data/data.csv` to be used in `makeChartsFromBase.R`
 
 ##### Preparing your base graphic
 
@@ -117,7 +119,7 @@ Using the `series_id` value, the name of the group can be inserted in the graphi
 
 The following R scripts are designed to be run indirectly via `batch.sh` but can be run from the command line if needed.
 
-##### makeChartFromBase.R
+##### makeChartsFromBase.R
 
 This script duplicates an exisiting chart and replaces the data, along with any templated hed, and dek values, publishes each chart, and returns a table containing the public urls. It takes two required arguments and an optional third.
 
@@ -131,7 +133,7 @@ This script duplicates an exisiting chart and replaces the data, along with any 
 Run script:
 
 ```
-Rscript scripts/makeChartFromBase.R base_chart_id "data/data.csv" [group_name|group_folder_id]
+Rscript scripts/makeChartsFromBase.R base_chart_id "data/data.csv" [group_name|group_folder_id]
 ```
 
 ***
