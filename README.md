@@ -12,15 +12,15 @@ A complete list of [DatawRappr functions can be found here](https://munichrocker
 
 ## Getting started
 
-Copy this repo using the `new-project-shell` [script](https://github.com/axiosvisuals/new-project-shell) or with degit. There are two CSV files within the `data` folder that should be edited depending on the type of chart you are making. 
+Copy this repo using the `new-project-shell` [script](https://github.com/axiosvisuals/new-project-shell) or with degit. There are two CSV files within the `data` folder that should be edited depending on the type of chart you are making.
 
 ### Using degit
 
-`degit` is a package that makes copies of a git repository's most recent commit. This allows for generating the scaffolding from this template directly from the command line. 
+`degit` is a package that makes copies of a git repository's most recent commit. This allows for generating the scaffolding from this template directly from the command line.
 
 Since this is a private repository, you'll need to set up SSH keys with your Github account. More information on how to do that [here](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent).
 
-To install degit: `npm install -g degit` 
+To install degit: `npm install -g degit`
 
 To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
 
@@ -74,7 +74,7 @@ You can test out the script with the included dummy data. This will duplicate a 
 
 ##### Preparing your data
 
-Your data should be formatted the same way as the data in your base chart with the addition of a `series_id` field. This value indicates the group – most likely a local – the row belongs to. The script uses the `series_id` value to split the dataset into chunks. 
+Your data should be formatted the same way as the data in your base chart with the addition of a `series_id` field. This value indicates the group – most likely a local – the row belongs to. The script uses the `series_id` value to split the dataset into chunks.
 
 | series_id | Label    | Men  | Women |
 | --------- | -------- | ---- | ----- |
@@ -87,7 +87,7 @@ Your data should be formatted the same way as the data in your base chart with t
 
 If working from a national file, isolate your data and paste into `data/data.csv`.
 
-If local reporters are filling out the data, clone and use either the [city](https://docs.google.com/spreadsheets/d/1sbAGPCY73Hxa3tQhoALMqbFvats9YxuSnLgRGlsxNBE/edit#gid=0) or [state](https://docs.google.com/spreadsheets/d/1y5dzvUFt_esSur820MTSp72-lp3IcGCIkou1p1-3ew0/edit#gid=0) Google Sheet template. Once complete, download as an Excel file and move it into `data/raw`. Run `./batch.sh` and select `processXls.R`. This will compile to sheets into a single table with the `series_id` prepended and save it to `data/data.csv` to be used in `makeChartsFromBase.R`
+If local reporters are filling out the data, clone and use either the [city](https://docs.google.com/spreadsheets/d/1sbAGPCY73Hxa3tQhoALMqbFvats9YxuSnLgRGlsxNBE/edit#gid=0) or [state](https://docs.google.com/spreadsheets/d/1y5dzvUFt_esSur820MTSp72-lp3IcGCIkou1p1-3ew0/edit#gid=0) Google Sheet template. Once complete, run `./batch.sh` and select `downloadSheet.R`. This will download and compile tne sheets into a single table, prepend the `series_id` using the sheet name, and save it to `data/data.csv` to be used in `makeChartsFromBase.R`
 
 ##### Preparing your base graphic
 

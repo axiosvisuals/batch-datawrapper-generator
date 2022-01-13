@@ -1,12 +1,15 @@
 #!/bin/bash
 
 cd "$(dirname "$0")"
-SCRIPTS=("processXls.R" "makeChartsFromBase.R" "makeLocalMapsFromNational.R" "deleteChartsInReference.R")
+SCRIPTS=("downloadSheet.R" "makeChartsFromBase.R" "makeLocalMapsFromNational.R" "deleteChartsInReference.R")
 echo "Which script do you want to run?"
 select SCRIPT in "${SCRIPTS[@]}"; do
-  if [[ "processXls.R" == "${SCRIPT}" ]]
+  if [[ "downloadSheet.R" == "${SCRIPT}" ]]
   then
-    Rscript scripts/processXls.R
+    echo "What is the Google Sheet ID or url"
+    echo -n "ID or url: "
+    read -r GID
+    Rscript scripts/downloadSheet.R ${GID}
     break;
   elif [[ "deleteChartsInReference.R" == "${SCRIPT}" ]]
   then

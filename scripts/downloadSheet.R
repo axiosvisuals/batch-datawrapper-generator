@@ -1,22 +1,19 @@
 library(googlesheets4)
 library(dplyr)
-library(readxl)
 library(readr)
 
 # gs4_auth()
+args <- commandArgs(trailingOnly = TRUE)
 
-url <- "https://docs.google.com/spreadsheets/d/1y5dzvUFt_esSur820MTSp72-lp3IcGCIkou1p1-3ew0/edit#gid=0"
+url <- args[1]
 
-
-
-path <- list.files(path="data/raw/", pattern="*.xlsx", full.names=TRUE, recursive=FALSE)
-sheet_names <- excel_sheets(path)
+sheet_names <- sheet_names(url)
 
 data_list <- list()
 
 for (name in sheet_names) {
   if (!name %in% c("meta", "raw")) {
-    sheet <- read_excel(path, name)
+    sheet <- read_sheet(url, name)
     
     sheet <- sheet %>% 
       mutate(series_id = name) %>% 
