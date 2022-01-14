@@ -6,7 +6,8 @@ A complete list of [DatawRappr functions can be found here](https://munichrocker
 
 ## Requirements
 
-- R, along with `DatawRappr` and `dplyr`
+- R
+-  `DatawRappr` ,  `dplyr`, `readr`, `googledrive`, `googlesheets4`
 - A [Datwrapper API-token](https://app.datawrapper.de/account/api-tokens)
 - The ID of the chart you are duplicating
 
@@ -28,6 +29,10 @@ To create a new project based on this template using [degit](https://github.com/
 npx degit axiosvisuals/batch-datawrapper-generator --mode=git project-name
 cd project-name
 ```
+### Google authorization set-up
+
+The first time you use `googledrive` and `googlesheets4` you will be prompted to authorize the package to access your Axios Google account. By default, you are directed to a web browser, asked to sign in to your Google account, and to grant libraries permission to operate on your behalf with Google Drive and Google Sheets. Check the "See, edit, create, and delete" permission and click Continue to authorize.
+
 ### API token set-up
 
 The first time you use `DatawRappr` you will need to autheniticate your API token. Start an R session either in the terminal or RStudio. Copy the API token [created in Datawrapper]() and use
@@ -47,7 +52,7 @@ To make sure, your key is working as expected, you can run
 
 ## Running the scripts
 
-Run `./batch.sh` and follow the prompts. Continue reading for instructions on how to use each script.
+Run `./batch.sh` and follow the prompts. Continue reading for instructions on how to use each script. After your batch is run, a reference sheet with the links to each chart is created and [uploaded to Google Drive](https://drive.google.com/drive/folders/1FtlzowesJ-uuOdVKqf2BeFCuwrRbEnah). The link to this Google Sheet will be printed to the terminal.
 
 ### Demo
 
