@@ -69,27 +69,19 @@ Run `./batch.sh` and follow the prompts. Continue reading for instructions on ho
 You can test out the script with the included dummy data. This will duplicate a template chart in the `Axios Visuals/dw auto test/` folder in Datawrapper (assuming it wasn't accidentally deleted), update the new charts with the dummy data, and place them in the testing folder.
 
 - Copy the repo using the `new-project-shell` [script](https://github.com/axiosvisuals/new-project-shell) or with degit
-
   - ```
     npx degit axiosvisuals/batch-datawrapper-generator --mode=git project-name
     cd project-name`
     ```
-
 - Run `./batch.sh`
-
 - Select `downloadSheet.R`
-
 - Pass the `1T_e-UDNy8hAU35ucua3xxJsoeQh5RPjxtoafclR9mpU` for the demo sheet ID and hit enter; The demo data should now be in `data/data,csv`
-
 - Run `./batch.sh`
-
 - Select `makeChartsFromBase.R`
-
 - Pass `mnX0x` for the base chart ID
-
 - Pass `76624` for the folder ID
-
 - View results on [Datawrapper](https://app.datawrapper.de/archive/team/xMwlyuwN/76624)
+- View the reference sheet with published URLs [on the Google Drive](https://docs.google.com/spreadsheets/d/1g69B4ialN9ylJspAKVzIIct7o9xYSIWEni8E6NNYg3I/edit#gid=2127911916)
 
 ### For charts
 
