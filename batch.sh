@@ -29,6 +29,7 @@ select SCRIPT in "${SCRIPTS[@]}"; do
     case "$SCRIPT" in
       "makeChartsFromBase.R" )
         Rscript scripts/$SCRIPT $BASE_ID "./data/data.csv" $FOLDER
+        Rscript scripts/publishReferenceSheet.R
         break;
         ;;
       "makeLocalMapsFromNational.R" )
