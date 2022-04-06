@@ -36,10 +36,10 @@ The first time you use `googledrive` and `googlesheets4` you will need to author
 Start an R session either in RStudio and run
 
 ```R
-> library(googledrive)
-> library(googlesheets4)
-> drive_auth()
-> gs4_auth()
+library(googledrive)
+library(googlesheets4)
+drive_auth()
+gs4_auth()
 ```
 You will be directed to a web browser, asked to sign in to your Google account, and to grant libraries permission to operate on your behalf with Google Drive and Google Sheets. Check the "See, edit, create, and delete" permission and click Continue to authorize.
 
@@ -48,8 +48,8 @@ You will be directed to a web browser, asked to sign in to your Google account, 
 The first time you use `DatawRappr` you will need to autheniticate your API token. Start an R session either in the terminal or RStudio. Copy the API token [created in Datawrapper]() and use
 
 ```R
-> library(DatawRappr)
-> datawrapper_auth(api_key = "TOKEN")
+library(DatawRappr)
+datawrapper_auth(api_key = "TOKEN")
 ```
 
 to save the key to your `.Renviron` file. If a key already exists, you may add the argument `overwrite = TRUE ` to `datawrapper_auth()`.
@@ -57,7 +57,7 @@ to save the key to your `.Renviron` file. If a key already exists, you may add t
 To make sure, your key is working as expected, you can run
 
 ```R
-> dw_test_key()
+dw_test_key()
 ```
 
 ## Running the scripts
