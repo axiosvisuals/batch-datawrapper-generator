@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cd "$(dirname "$0")"
-SCRIPTS=("downloadSheet.R" "makeChartsFromBase.R" "makeLocalMapsFromNational.R" "deleteChartsInReference.R")
+SCRIPTS=("downloadSheet.R" "makeChartsFromBase.R" "makeLocalMapsFromNational.R" "updateChartsInReference.R" "deleteChartsInReference.R")
 echo "Which script do you want to run?"
 select SCRIPT in "${SCRIPTS[@]}"; do
   if [[ "downloadSheet.R" == "${SCRIPT}" ]]
@@ -15,6 +15,10 @@ select SCRIPT in "${SCRIPTS[@]}"; do
   then
     Rscript scripts/deleteChartsInReference.R "./reference_output.csv"
     break;
+  elif [[ "updateChartsInReference.R" == "${SCRIPT}" ]]
+  then
+    Rscript scripts/updateChartsInReference.R
+    break;
   else
     echo "What is the base chart ID?"
     echo -n "Base chart ID: "
@@ -25,7 +29,6 @@ select SCRIPT in "${SCRIPTS[@]}"; do
     case "$SCRIPT" in
       "makeChartsFromBase.R" )
         Rscript scripts/$SCRIPT $BASE_ID "./data/data.csv" $FOLDER
-        Rscript scripts/publishReferenceSheet.R
         break;
         ;;
       "makeLocalMapsFromNational.R" )

@@ -68,7 +68,7 @@ if (length(Sys.getenv("DW_KEY"))) {
 
     series_id <- df[1,]$series_id
     row <- deployChart(
-      chart_data = df,
+      chart_data = select(df, -series_id),
       series_id
     )
 
