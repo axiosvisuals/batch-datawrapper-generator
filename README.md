@@ -82,6 +82,7 @@ You can test out the script with the included dummy data. This will duplicate a 
 - Pass `76624` for the folder ID
 - View results on [Datawrapper](https://app.datawrapper.de/archive/team/xMwlyuwN/76624)
 - View the reference sheet with published URLs [on the Google Drive](https://docs.google.com/spreadsheets/d/1g69B4ialN9ylJspAKVzIIct7o9xYSIWEni8E6NNYg3I/edit#gid=2127911916)
+- To delete the charts, run `./batch.sh` and select `deleteChartsInReference.R`
 
 ### For charts
 
