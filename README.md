@@ -77,6 +77,12 @@ You can test out the script with the included dummy data. This will duplicate a 
 
 - Run `./batch.sh`
 
+- Select `downloadSheet.R`
+
+- Pass the `1T_e-UDNy8hAU35ucua3xxJsoeQh5RPjxtoafclR9mpU` for the demo sheet ID and hit enter; The demo data should now be in `data/data,csv`
+
+- Run `./batch.sh`
+
 - Select `makeChartsFromBase.R`
 
 - Pass `mnX0x` for the base chart ID
