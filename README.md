@@ -31,7 +31,17 @@ cd project-name
 ```
 ### Google authorization set-up
 
-The first time you use `googledrive` and `googlesheets4` you will be prompted to authorize the package to access your Axios Google account. By default, you are directed to a web browser, asked to sign in to your Google account, and to grant libraries permission to operate on your behalf with Google Drive and Google Sheets. Check the "See, edit, create, and delete" permission and click Continue to authorize.
+The first time you use `googledrive` and `googlesheets4` you will need to authorize the package to access your Axios Google account.
+
+Start an R session either in RStudio and run
+
+```R
+> library(googledrive)
+> library(googlesheets4)
+> drive_auth()
+> gs4_auth()
+```
+You will be directed to a web browser, asked to sign in to your Google account, and to grant libraries permission to operate on your behalf with Google Drive and Google Sheets. Check the "See, edit, create, and delete" permission and click Continue to authorize.
 
 ### API token set-up
 
