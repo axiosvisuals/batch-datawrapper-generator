@@ -33,8 +33,11 @@ select SCRIPT in "${SCRIPTS[@]}"; do
         break;
         ;;
       "makeLocalMapsFromNational.R" )
-        Rscript scripts/$SCRIPT $BASE_ID "./data/locals.csv" $FOLDER
-        Rscript scripts/publishReferenceSheet.R
+        echo "Do you want to include city labels?"
+        echo -n "(y/n): "
+        read -r LABELS_BOOL
+        Rscript scripts/$SCRIPT $BASE_ID "./data/locals.csv" $FOLDER $LABELS_BOOL
+        # Rscript scripts/publishReferenceSheet.R
         ;;
       * )
         echo "Invalid option. Exiting run."

@@ -2,24 +2,18 @@ library(dplyr)
 library(readr)
 library(DatawRappr)
 
-# library(base)
-# thisFile <- function() {
-#   cmdArgs <- commandArgs(trailingOnly = FALSE)
-#   needle <- "--file="
-#   match <- grep(needle, cmdArgs)
-#   if (length(match) > 0) {
-#     # Rscript
-#     return(normalizePath(sub(needle, "", cmdArgs[match])))
-#   } else {
-#     # 'source'd via R console
-#     return(normalizePath(sys.frames()[[1]]$ofile))
-#   }
-# }
+
+args <- commandArgs(trailingOnly = TRUE)
 
 axios_visuals_id <- "xMwlyuwN"
 
+places_meta <- dw_retrieve_chart_metadata('4b6fj')
+places <- places_meta$content$metadata$visualize$labels$places
+includeLabels <- if (tolower(args[4]) %in% c("y", "yes", "true")) "true" else FALSE
+message(includeLabels)
+
 deployChart <- function(series_id, basemap_id) {
-  
+
   base_meta <- dw_retrieve_chart_metadata(base_chart_id)
 
   chart_hed = gsub("%series_id%", series_id, base_meta$content$title)
@@ -28,13 +22,18 @@ deployChart <- function(series_id, basemap_id) {
   chart <- dw_copy_chart(base_chart_id)
   system(paste("./scripts/moveFile.sh", chart$id, group_folder_id, Sys.getenv("DW_KEY"), sep=" "))
 
+
   if (basemap_id %in% dw_basemaps$id) {
     dw_edit_chart(
       chart$id,
       title = chart_hed,
       intro = chart_dek,
       visualize = list(
-        basemap = basemap_id
+        basemap = basemap_id,
+        labels = list(
+          enabled = includeLabels,
+          places = places
+        )
       )
     )
   } else {
@@ -56,18 +55,16 @@ deployChart <- function(series_id, basemap_id) {
   )
 
   message('Chart published to ', published$publicUrl)
-  
+
   return(row)
 }
 
 if (length(Sys.getenv("DW_KEY"))) {
-  
-  args <- commandArgs(trailingOnly = TRUE)
-  
+
   base_chart_id <- args[1]
-  
+
   data <- read_csv(args[2])
-  
+
   if (length(args)>2) {
     if (grepl("\\D", args[3])) {
       group_name <- args[3]
@@ -76,31 +73,29 @@ if (length(Sys.getenv("DW_KEY"))) {
         organization_id=axios_visuals_id
       )
     } else {
-      group_name <- "" 
+      group_name <- ""
       group_folder_id <- args[3]
-    }    
+    }
   }
 
   reference_list <- list()
-  
+
   locals <- read.csv(args[2])
-  
+
   for (i in 1:nrow(locals)) {
-    
+
     row <- deployChart(
       series_id = locals[i,]$series_id,
       basemap_id = locals[i,]$basemap_id
     )
-    
+
     reference_list[[length(reference_list) + 1]] <- row
   }
-  
+
   reference_df <- bind_rows(reference_list)
-  
+
   write_csv(reference_df, "reference_output.csv")
-  
+
 } else {
   message('Datawrapper token not set. Set by running datawrapper_auth(api_key = "12345678")')
 }
-
-
