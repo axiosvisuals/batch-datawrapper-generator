@@ -1,14 +1,14 @@
-﻿series_id,basemap_id
-Charlotte,north-carolina-counties
-Des Moines,iowa-counties
-Tampa,florida-counties
-Denver,colorado-counties
-Twin Cities,minnesota-counties
-Northwest Arkansas,arkansas-counties
-Nashville,tennessee-counties
-Chicago,illinois-counties
-Austin/Dallas,texas-counties
-Columbus,ohio-counties
-Atlanta,georgia-counties
-Philly,pennsylvania-counties
+﻿series_id,basemap_geography_id
+Charlotte,north-carolina
+Des Moines,iowa
+Tampa,florida
+Denver,colorado
+Twin Cities,minnesota
+Northwest Arkansas,arkansas
+Nashville,tennessee
+Chicago,illinois
+Austin/Dallas,texas
+Columbus,ohio
+Atlanta,georgia
+Philly,pennsylvania
 DC,pMsqV

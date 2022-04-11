@@ -10,9 +10,12 @@ axios_visuals_id <- "xMwlyuwN"
 places_meta <- dw_retrieve_chart_metadata('4b6fj')
 places <- places_meta$content$metadata$visualize$labels$places
 includeLabels <- if (tolower(args[4]) %in% c("y", "yes", "true")) "true" else FALSE
-message(includeLabels)
 
-deployChart <- function(series_id, basemap_id) {
+
+
+
+
+deployChart <- function(series_id, basemap_geography_id) {
 
   base_meta <- dw_retrieve_chart_metadata(base_chart_id)
 
@@ -22,6 +25,18 @@ deployChart <- function(series_id, basemap_id) {
   chart <- dw_copy_chart(base_chart_id)
   system(paste("./scripts/moveFile.sh", chart$id, group_folder_id, Sys.getenv("DW_KEY"), sep=" "))
 
+  # basemap
+  levels <- c("counties",
+              "municipalities",
+              "postcode",
+              "census-2020")
+
+
+  basemap_level_id <- levels[which(sapply(levels, grepl, base_meta$content$metadata$visualize$basemap))]
+
+  basemap_id <- paste0(basemap_geography_id, '-', basemap_level_id)
+
+  message(paste0("\n\nUsing ", basemap_id))
 
   if (basemap_id %in% dw_basemaps$id) {
     dw_edit_chart(
@@ -42,7 +57,7 @@ deployChart <- function(series_id, basemap_id) {
       title = chart_hed,
       intro = chart_dek
     )
-    system(paste("./scripts/updateCustomJSON.sh", chart$id, basemap_id, Sys.getenv("DW_KEY"), sep=" "))
+    system(paste("./scripts/updateCustomJSON.sh", chart$id, basemap_geography_id, Sys.getenv("DW_KEY"), sep=" "))
   }
 
   published <- dw_publish_chart(chart$id, return_object = TRUE)
@@ -81,12 +96,12 @@ if (length(Sys.getenv("DW_KEY"))) {
   reference_list <- list()
 
   locals <- read.csv(args[2])
-
+  
   for (i in 1:nrow(locals)) {
 
     row <- deployChart(
       series_id = locals[i,]$series_id,
-      basemap_id = locals[i,]$basemap_id
+      basemap_geography_id = locals[i,]$basemap_geography_id
     )
 
     reference_list[[length(reference_list) + 1]] <- row
