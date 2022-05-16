@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cd "$(dirname "$0")"
-SCRIPTS=("downloadSheet.R" "makeChartsFromBase.R" "makeLocalMapsFromNational.R" "updateChartsInReference.R" "deleteChartsInReference.R")
+SCRIPTS=("downloadSheet.R" "makeChartsFromBase.R" "makeLocalMapsFromNational.R" "makeSymbolMapFromBase.R" "updateChartsInReference.R" "deleteChartsInReference.R")
 echo "Which script do you want to run?"
 select SCRIPT in "${SCRIPTS[@]}"; do
   if [[ "downloadSheet.R" == "${SCRIPT}" ]]
@@ -37,7 +37,14 @@ select SCRIPT in "${SCRIPTS[@]}"; do
         echo -n "(y/n): "
         read -r LABELS_BOOL
         Rscript scripts/$SCRIPT $BASE_ID "./data/locals.csv" $FOLDER $LABELS_BOOL
-        # Rscript scripts/publishReferenceSheet.R
+        Rscript scripts/publishReferenceSheet.R
+        ;;
+      "makeSymbolMapFromBase.R" )
+        echo "Do you want to include city labels?"
+        echo -n "(y/n): "
+        read -r LABELS_BOOL
+        Rscript scripts/$SCRIPT $BASE_ID $FOLDER $LABELS_BOOL
+        Rscript scripts/publishReferenceSheet.R
         ;;
       * )
         echo "Invalid option. Exiting run."

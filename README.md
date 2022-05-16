@@ -1,6 +1,6 @@
 # batch-datawrapper-generator
 
-This repository contains R scripts for batch chart and map creation using the Datawrapper API via the `DatawRappr` package, as well as a Bash script wrapper. While the API does support generating a chart or map from scratch, this workflow assumes you are duplicating an exisiting chart already created in Datawrapper.
+This repository contains R scripts for batch chart and map creation using the Datawrapper API via the `DatawRappr` package, as well as a Bash script wrapper. While the API does support generating a chart or map from scratch, this workflow assumes you are duplicating an existing chart already created in Datawrapper.
 
 A complete list of [DatawRappr functions can be found here](https://munichrocker.github.io/DatawRappr/reference/index.html).
 
@@ -33,7 +33,7 @@ cd project-name
 
 The first time you use `googledrive` and `googlesheets4` you will need to authorize the package to access your Axios Google account.
 
-Start an R session either in RStudio and run
+Start an R session in RStudio and run
 
 ```R
 library(googledrive)
@@ -41,11 +41,11 @@ library(googlesheets4)
 drive_auth()
 gs4_auth()
 ```
-You will be directed to a web browser, asked to sign in to your Google account, and to grant libraries permission to operate on your behalf with Google Drive and Google Sheets. Check the "See, edit, create, and delete" permission and click Continue to authorize.
+You will be directed to a web browser, asked to sign in to your Google account, and to grant libraries permission to operate on your behalf with Google Drive and Google Sheets. Check the "See, edit, create, and delete" permission and click Continue to authorize. You may need to restart any existing R sessions for the authorization to take place.
 
 ### API token set-up
 
-The first time you use `DatawRappr` you will need to autheniticate your API token. Start an R session either in the terminal or RStudio. Copy the API token [created in Datawrapper]() and use
+The first time you use `DatawRappr` you will need to authenticate your API token. Start an R session either in RStudio. Copy the API token [created in Datawrapper]() and run
 
 ```R
 library(DatawRappr)
@@ -62,7 +62,7 @@ dw_test_key()
 
 ## Running the scripts
 
-Run `./batch.sh` and follow the prompts. Continue reading for instructions on how to use each script. After your batch is run, a reference sheet with the links to each chart is created and [uploaded to Google Drive](https://drive.google.com/drive/folders/1FtlzowesJ-uuOdVKqf2BeFCuwrRbEnah). The link to this Google Sheet will be printed to the terminal.
+To source any of the R scripts, run `./batch.sh` and follow the prompts. Continue reading for instructions on how to use each script. After your batch is run, a reference sheet with the links to each chart is created and [uploaded to Google Drive](https://drive.google.com/drive/folders/1FtlzowesJ-uuOdVKqf2BeFCuwrRbEnah). The link to this Google Sheet will be printed to the terminal.
 
 ### Demo
 
@@ -85,7 +85,7 @@ You can test out the script with the included dummy data. This will duplicate a 
 - To update the charts after modifying the data file, run `./batch.sh` and select `updateChartsInReference.R`
 - To delete the charts, run `./batch.sh` and select `deleteChartsInReference.R`
 
-### For charts
+### Charts | `makeChartsFromBase.R`
 
 ##### Preparing your data
 
@@ -102,7 +102,7 @@ Your data should be formatted the same way as the data in your base chart with t
 
 If working from a national file, isolate your data and paste into `data/data.csv`.
 
-If local reporters are filling out the data, clone and use either the [city](https://docs.google.com/spreadsheets/d/1sbAGPCY73Hxa3tQhoALMqbFvats9YxuSnLgRGlsxNBE/edit#gid=0) or [state](https://docs.google.com/spreadsheets/d/1y5dzvUFt_esSur820MTSp72-lp3IcGCIkou1p1-3ew0/edit#gid=0) Google Sheet template. Once complete, run `./batch.sh` and select `downloadSheet.R`. This will download and compile tne sheets into a single table, prepend the `series_id` using the sheet name, and save it to `data/data.csv` to be used in `makeChartsFromBase.R`
+If local reporters are filling out the data, clone and use either the [city](https://docs.google.com/spreadsheets/d/1sbAGPCY73Hxa3tQhoALMqbFvats9YxuSnLgRGlsxNBE/edit#gid=0) or [state](https://docs.google.com/spreadsheets/d/1y5dzvUFt_esSur820MTSp72-lp3IcGCIkou1p1-3ew0/edit#gid=0) Google Sheet template. Once complete, run `./batch.sh` and select `downloadSheet.R`. This will download and compile the sheets into a single table, prepend the `series_id` using the sheet name, and save it to `data/data.csv` to be used in `makeChartsFromBase.R`
 
 ##### Preparing your base graphic
 
@@ -112,7 +112,7 @@ Using the `series_id` value, the name of the group can be inserted in the graphi
 
 ![alt text](https://user-images.githubusercontent.com/15233857/136981359-a43005e8-b41d-414a-922c-b15af6b9987b.png)
 
-### For maps
+### Choropleth maps | `makeChoroplethMapsFromBase.R`
 
 If you are creating zoomed in versions of a national map, an efficient method is to include the entire national dataset in your base graphic and then instead of updating the data, simply change the basemap ID. While every duplicated map will contain the entire dataset, it will only render those with matching FIPS codes.
 
@@ -120,66 +120,59 @@ If you are creating zoomed in versions of a national map, an efficient method is
 
 Make a table containing the `series_id` and `basemap_id` for each local. An example at the county level can be found at `data/locals.csv`. To get a table of the basemaps available in Datawrapper, run `dw_basemaps`.
 
-If you need to make a map containing a custom geography, replace `basemap_id` with the chart id of an existing Datawrapper map. The script will then download the custom geojson of the existing map and upload it to the new one. Due to limitations with `DatawRappr`, this process is handled by `updateCustomJSON.sh`. It is possible to upload new geojson files directly with minor modifications to the `updateCustomJSON.sh`.
-
 Paste your data into `data/locals.csv`.
 
 ##### Preparing your base graphic
+
+Make a basemap using the boundary type (state, county, etc.) you want to use in the batched versions. Upload your data and stylize the choropleth and popups.
 
 Copied charts retain any style and textual information, so make sure your base graphic looks the way you want your published versions to appear. If you need to dynamically change the styles of a graphic, add additional arguments to `dw_edit_chart()`  within `deployChart()`.
 
 Using the `series_id` value, the name of the group can be inserted in the graphic's hed and dek. Use `%series_id%` to indicate where it should be inserted.
 
-## A deeper look at the R scripts
+When running the script, you wil be prompted to add city names to your map. If selected, the city labels will be copied from a [template map](https://app.datawrapper.de/map/4b6fj/visualize#refine) and applied to your batch. You may need to manually delete floating city names of bordering states afterwards (this is a DW bug). If you think a new city should be added, [edit the template](https://app.datawrapper.de/map/4b6fj/visualize#refine).
 
-The following R scripts are designed to be run indirectly via `batch.sh` but can be run from the command line if needed.
+### Symbol maps | `makeSymbolMapsFromBase.R`
 
-##### makeChartsFromBase.R
+The symbol map workflow is a combination of the chart and choropleth workflows. You will still be cloning a national map and updating the `basemap_id`, but in order to prevent points from overflowing beyond your target region, you will also insert the subsetted data into it it.
 
-This script duplicates an exisiting chart and replaces the data, along with any templated hed, and dek values, publishes each chart, and returns a table containing the public urls. It takes two required arguments and an optional third.
+##### Preparing your data
 
-| Parameter       | Description                                                  | Required |
-| --------------- | ------------------------------------------------------------ | -------- |
-| base_chart_id   | Alphnumeric code of chart to duplicate                       | Yes      |
-| "Data/data.csv" | Path to dataset                                              | Yes      |
-| group_name      | The name of a new folder to store the charts created in this batch. | No       |
-| group_folder_id | The numeric code of an existing folder. Cannot contain non-numeric values, else will be interpreted as `group_name` | No       |
+You will need to edit both `data/data.csv` and `data/locals.csv`. `data.csv` follows the same format used in `makeChartsFromBase.R` with the addition of latitude and longitude columns. `locals.csv` follows the same format used in `makeChoroplethMapsFromBase.R`.
 
-Run script:
+##### Preparing your base graphic
 
-```
-Rscript scripts/makeChartsFromBase.R base_chart_id "data/data.csv" [group_name|group_folder_id]
-```
+Make a basemap using the boundary type (state, county, etc.) you want to use in the batched versions. Upload a sample of your data to set up the variable schema and give you points to stylize.
+
+Copied charts retain any style and textual information, so make sure your base graphic looks the way you want your published versions to appear. If you need to dynamically change the styles of a graphic, add additional arguments to `dw_edit_chart()`  within `deployChart()`.
+
+Using the `series_id` value, the name of the group can be inserted in the graphic's hed and dek. Use `%series_id%` to indicate where it should be inserted.
+
+When running the script, you wil be prompted to add city names to your map. If selected, the city labels will be copied from a [template map](https://app.datawrapper.de/map/4b6fj/visualize#refine) and applied to your batch. You may need to manually delete floating city names of bordering states afterwards (this is a DW bug). If you think a new city should be added, [edit the template](https://app.datawrapper.de/map/4b6fj/visualize#refine).
+
+
+## Additional scripts
+
+
+##### downloadSheet.R
+
+Prompts for a [Google Sheet template](https://drive.google.com/drive/u/0/folders/15AInhBKCbwznQ-sEUZpu_3tqwVYElaZk) url or ID, downloads the data from each tab, merges it into a single table and saves it to `data/data.csv`.
 
 ***
 
-##### makeLocalMapsFromNational.R
+##### publishReferenceSheet.R
 
-This script duplicates an existing map, updates the basemap, along with any templated hed, and dek values, publishes each chart, and returns a table containing the public urls. It takes two required arguments and an option third.
+Publishes `reference_output.csv` to [Google Drive](https://drive.google.com/drive/u/0/folders/1FtlzowesJ-uuOdVKqf2BeFCuwrRbEnah). This is automatically run at the end of each generator
 
-The base chart must include data for the corresponding FIPS codes in the local maps.
+***
 
-| Parameter         | Description                                                  | Required |
-| ----------------- | ------------------------------------------------------------ | -------- |
-| base_chart_id     | Alphnumeric code of chart to duplicate                       | Yes      |
-| "data/locals.csv" | Path to table containing basemap ids                         | Yes      |
-| group_name        | The name of a new folder to store the charts created in this batch. | No       |
-| group_folder_id   | The numeric code of an existing folder. Cannot contain non-numeric values, else will be interpreted as `group_name` | No       |
+##### updateChartsInReference.R
 
-Run script:
-
-```
-Rscript scripts/makeLocalMapsFromNational.R base_chart_id "data/locals.csv" [group_name|group_folder_id]
-```
+Replaces the data of charts referenced in `reference_output.csv` with the data in `data/data.csv`.
 
 ***
 
 ##### deleteChartsInReference.R
 
-This script deletes all of the charts referenced by `chart_id` in a csv file.
+Delets charts referenced in `reference_output.csv`.
 
-Run script:
-
-```
-Rscript scripts/deleteChartsInReference.R "./reference_output.csv"
-```
