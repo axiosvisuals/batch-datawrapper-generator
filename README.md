@@ -118,7 +118,7 @@ If you are creating zoomed in versions of a national map, an efficient method is
 
 ##### Preparing your data
 
-Make a table containing the `series_id` and `basemap_id` for each local. An example at the county level can be found at `data/locals.csv`. To get a table of the basemaps available in Datawrapper, run `dw_basemaps`.
+Make a table containing the `series_id` and truncated `basemap_id` for each local. The geography level of the template will be used. Note, county or smaller geography must be used.
 
 Paste your data into `data/locals.csv`.
 
