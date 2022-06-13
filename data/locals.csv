@@ -1,14 +1,20 @@
-﻿series_id,basemap_geography_id
-Charlotte,north-carolina
-Des Moines,iowa
-Tampa,florida
-Denver,colorado
-Twin Cities,minnesota
-Northwest Arkansas,arkansas
-Nashville,tennessee
-Chicago,illinois
-Austin/Dallas,texas
-Columbus,ohio
-Atlanta,georgia
-Philly,pennsylvania
-DC,pMsqV
+series_id,basemap_geography_id
+North Carolina,north-carolina
+Iowa,iowa
+Florida,florida
+Colorado,colorado
+Minnesota,minnesota
+Arkansas,arkansas
+Tennessee,tennessee
+Illinois,illinois
+Texas,texas
+Ohio,ohio
+Georgia,georgia
+Pennsylvania,pennsylvania
+Virginia,virginia
+California,california
+Maryland,maryland
+Massachusetts,massachusetts
+Washington,washington
+Arizona,arizona
+Utah,utah
