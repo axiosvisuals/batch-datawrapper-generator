@@ -100,9 +100,9 @@ Your data should be formatted the same way as the data in your base chart with t
 | Group C   | Agree    | 1507 | 394   |
 | Group C   | Disagree | 266  | 1030  |
 
-If working from a national file, isolate your data and paste into `data/data.csv`.
+After preparing your data, save it to `data/data.csv`.
 
-If local reporters are filling out the data, clone and use either the [city](https://docs.google.com/spreadsheets/d/1sbAGPCY73Hxa3tQhoALMqbFvats9YxuSnLgRGlsxNBE/edit#gid=0) or [state](https://docs.google.com/spreadsheets/d/1y5dzvUFt_esSur820MTSp72-lp3IcGCIkou1p1-3ew0/edit#gid=0) Google Sheet template. Once complete, run `./batch.sh` and select `downloadSheet.R`. This will download and compile the sheets into a single table, prepend the `series_id` using the sheet name, and save it to `data/data.csv` to be used in `makeChartsFromBase.R`
+Alternatively, data can be inputted for each series individually using either the [city](https://docs.google.com/spreadsheets/d/1sbAGPCY73Hxa3tQhoALMqbFvats9YxuSnLgRGlsxNBE/edit#gid=0) or [state](https://docs.google.com/spreadsheets/d/1y5dzvUFt_esSur820MTSp72-lp3IcGCIkou1p1-3ew0/edit#gid=0) Google Sheet template. Once complete, run `./batch.sh` and select `downloadSheet.R`. This will download and compile the sheets into a single table, prepend the `series_id` using the sheet name, and save it to `data/data.csv` to be used in `makeChartsFromBase.R`. This workflow is intended for when reporters are filling out their local's data sheet individually. If working from a national file, manually isolating the included series and saving it as a single spreadsheet to `data/data.csv` is the preferred method.
 
 ##### Preparing your base graphic
 
