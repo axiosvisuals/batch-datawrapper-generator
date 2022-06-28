@@ -167,7 +167,7 @@ When running the script, you wil be prompted to add city names to your map. If s
 
 ##### downloadSheet.R
 
-Prompts for a [Google Sheet template](https://drive.google.com/drive/u/0/folders/15AInhBKCbwznQ-sEUZpu_3tqwVYElaZk) url or ID, downloads the data from each tab, merges it into a single table and saves it to `data/data.csv`.
+Prompts for an Axios [Google Sheet template](https://drive.google.com/drive/u/0/folders/15AInhBKCbwznQ-sEUZpu_3tqwVYElaZk) url or ID, downloads the data from each tab, merges it into a single table and saves it to `data/data.csv`.
 
 ***
 
