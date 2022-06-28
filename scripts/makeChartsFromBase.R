@@ -2,8 +2,6 @@ library(dplyr)
 library(readr)
 library(DatawRappr)
 
-axios_visuals_id <- "xMwlyuwN"
-
 deployChart <- function(chart_data, series_id) {
 
   base_meta <- dw_retrieve_chart_metadata(base_chart_id)
@@ -44,13 +42,13 @@ if (length(Sys.getenv("DW_KEY"))) {
   base_chart_id <- args[1]
 
   data <- read_csv(args[2])
-  
+
   if (length(args)>2) {
     if (grepl("\\D", args[3])) {
       group_name <- args[3]
       group_folder_id <- dw_create_folder(
         name=group_name,
-        organization_id=axios_visuals_id
+        organization_id=Sys.getenv('DW_ORGANIZATION_ID')
       )
     } else {
       group_name <- ""

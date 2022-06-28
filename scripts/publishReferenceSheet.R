@@ -15,13 +15,10 @@ sheet <- gs4_create(
 
 meta <- gs4_get(sheet)
 
-reference_folder <- "1FtlzowesJ-uuOdVKqf2BeFCuwrRbEnah"
-
 drive_mv(
   file=as_id(meta$spreadsheet_id),
-  path = as_id(reference_folder),
+  path = as_id(Sys.getenv('DRIVE_REFERENCE_FOLDER_ID')),
   overwrite = TRUE
 )
 
 message('Reference Google Sheet: ', drive_link(sheet))
-

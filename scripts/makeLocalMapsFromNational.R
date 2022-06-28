@@ -5,8 +5,6 @@ library(DatawRappr)
 
 args <- commandArgs(trailingOnly = TRUE)
 
-axios_visuals_id <- "xMwlyuwN"
-
 places_meta <- dw_retrieve_chart_metadata('4b6fj')
 places <- places_meta$content$metadata$visualize$labels$places
 includeLabels <- if (tolower(args[4]) %in% c("y", "yes", "true")) "true" else FALSE
@@ -85,7 +83,7 @@ if (length(Sys.getenv("DW_KEY"))) {
       group_name <- args[3]
       group_folder_id <- dw_create_folder(
         name=group_name,
-        organization_id=axios_visuals_id
+        organization_id=Sys.getenv('DW_ORGANIZATION_ID')
       )
     } else {
       group_name <- ""
@@ -96,7 +94,7 @@ if (length(Sys.getenv("DW_KEY"))) {
   reference_list <- list()
 
   locals <- read.csv(args[2])
-  
+
   for (i in 1:nrow(locals)) {
 
     row <- deployChart(

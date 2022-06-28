@@ -1,6 +1,6 @@
 # batch-datawrapper-generator
 
-This repository contains R scripts for batch chart and map creation using the Datawrapper API via the `DatawRappr` package, as well as a Bash script wrapper. While the API does support generating a chart or map from scratch, this workflow assumes you are duplicating an existing chart already created in Datawrapper.
+This repository contains R scripts for batch chart and map creation using the Datawrapper API via the `DatawRappr` package, as well as a Bash script wrapper. While the API does support generating a chart or map from scratch, this workflow assumes you are duplicating an existing chart already created in Datawrapper. There are two CSV files within the `data` folder that should be edited depending on the type of chart you are making.
 
 A complete list of [DatawRappr functions can be found here](https://munichrocker.github.io/DatawRappr/reference/index.html).
 
@@ -13,9 +13,10 @@ A complete list of [DatawRappr functions can be found here](https://munichrocker
 
 ## Getting started
 
-Copy this repo using the `new-project-shell` [script](https://github.com/axiosvisuals/new-project-shell) or with degit. There are two CSV files within the `data` folder that should be edited depending on the type of chart you are making.
+### For Axions
+Copy this repo using the `new-project-shell` [script](https://github.com/axiosvisuals/new-project-shell).
 
-### Using degit
+### For everyone else, use degit
 
 `degit` is a package that makes copies of a git repository's most recent commit. This allows for generating the scaffolding from this template directly from the command line.
 
@@ -59,6 +60,16 @@ To make sure, your key is working as expected, you can run
 ```R
 dw_test_key()
 ```
+
+### `.Renviron` set-up
+
+Along with Datawrapper and Drive authorization, there are two environmental variables that need to be set in your machine's `.Renviron` file.
+
+| Name                   | Description                                                           | Example                           |
+|------------------------|-----------------------------------------------------------------------|-----------------------------------|
+| `DW_ORGANIZATION_ID`     | Alphanumeric ID of your team's Datawrapper account                    | `xMwlyuwN`                          |
+| `DRIVE_REFERENCE_FOLDER_ID` | Google Drive ID of the Drive folder where reference sheets are stored | `1FtlzowesJ-uuOdVKqf2BeFCuwrRbEnah` |
+
 
 ## Running the scripts
 
@@ -175,4 +186,3 @@ Replaces the data of charts referenced in `reference_output.csv` with the data i
 ##### deleteChartsInReference.R
 
 Delets charts referenced in `reference_output.csv`.
-
