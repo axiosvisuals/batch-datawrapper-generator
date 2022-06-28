@@ -75,7 +75,7 @@ Along with Datawrapper and Drive authorization, there are two environmental vari
 
 To source any of the R scripts, run `./batch.sh` and follow the prompts. Continue reading for instructions on how to use each script. After your batch is run, a reference sheet with the links to each chart is created and [uploaded to Google Drive](https://drive.google.com/drive/folders/1FtlzowesJ-uuOdVKqf2BeFCuwrRbEnah). The link to this Google Sheet will be printed to the terminal.
 
-### Demo
+### Axios Demo
 
 You can test out the script with the included dummy data. This will duplicate a template chart in the `Axios Visuals/dw auto test/` folder in Datawrapper (assuming it wasn't accidentally deleted), update the new charts with the dummy data, and place them in the testing folder.
 
