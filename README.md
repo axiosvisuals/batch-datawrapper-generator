@@ -46,7 +46,7 @@ You will be directed to a web browser, asked to sign in to your Google account, 
 
 ### API token set-up
 
-The first time you use `DatawRappr` you will need to authenticate your API token. Start an R session either in RStudio. Copy the API token [created in Datawrapper]() and run
+The first time you use `DatawRappr` you will need to authenticate your API token. Start an R session either in RStudio. Copy the API token [created in Datawrapper](https://app.datawrapper.de/account/api-tokens) and run
 
 ```R
 # install.packages("devtools") # if not already installed on your system
