@@ -15,10 +15,25 @@ sheet <- gs4_create(
 
 meta <- gs4_get(sheet)
 
+fileId <- meta$spreadsheet_id
+
 drive_mv(
-  file=as_id(meta$spreadsheet_id),
+  file=as_id(url),
   path = as_id(Sys.getenv('DRIVE_REFERENCE_FOLDER_ID')),
   overwrite = TRUE
 )
 
+drive_publish(fileId)
+
+drive_share(fileId,
+            role="reader",
+            type="anyone"
+)
+
+
 message('Reference Google Sheet: ', drive_link(sheet))
+
+message('Batch preview link: https://visuals.axioscode.tools/batch-previewer#/#',  paste0(fileId))
+
+
+
