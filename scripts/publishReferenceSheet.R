@@ -11,7 +11,7 @@ reference_df <- read_csv("reference_output.csv")
 sheet <- gs4_create(
   name=directoryname,
   sheets=reference_df
-  )
+)
 
 meta <- gs4_get(sheet)
 
@@ -23,9 +23,9 @@ drive_mv(
   overwrite = TRUE
 )
 
-drive_publish(fileId)
+drive_publish(as_id(fileId))
 
-drive_share(fileId,
+drive_share(as_id(fileId),
             role="reader",
             type="anyone"
 )
@@ -33,7 +33,7 @@ drive_share(fileId,
 
 message('Reference Google Sheet: ', drive_link(sheet))
 
-message('Batch preview link: https://visuals.axioscode.tools/batch-previewer#/#',  paste0(fileId))
+message('Batch preview link: https://visuals.axioscode.tools/batch-previewer#',  paste0(fileId))
 
 
 
