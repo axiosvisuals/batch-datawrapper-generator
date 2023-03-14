@@ -48,6 +48,9 @@ deployChart <- function(chart_data, series_id, basemap_geography_id) {
           enabled = includeLabels,
           places = places
         )
+      ),
+      describe = list(
+        "aria-description" = gsub("%series_id%", series_id, base_meta$content$metadata$describe$`aria-description`)
       )
     )
   } else {

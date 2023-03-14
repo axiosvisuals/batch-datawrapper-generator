@@ -121,7 +121,7 @@ Alternatively, data can be inputted for each series individually using either th
 
 Copied charts retain any style and textual information, so make sure your base graphic looks the way you want your published versions to appear. If you need to dynamically change the styles of a graphic, add additional arguments to `dw_edit_chart()`  within `deployChart()`.
 
-Using the `series_id` value, the name of the group can be inserted in the graphic's hed and dek. Use `%series_id%` to indicate where it should be inserted.
+Using the `series_id` value, the name of the group can be inserted in the graphic's hed, dek, and alt text. Use `%series_id%` to indicate where it should be inserted. This code can be edited to support alternative variables.
 
 ![alt text](https://user-images.githubusercontent.com/15233857/136981359-a43005e8-b41d-414a-922c-b15af6b9987b.png)
 
