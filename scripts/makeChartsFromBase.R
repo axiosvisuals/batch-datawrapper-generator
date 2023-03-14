@@ -18,7 +18,10 @@ deployChart <- function(chart_data, series_id) {
   dw_edit_chart(
     chart$id,
     title = chart_hed,
-    intro = chart_dek
+    intro = chart_dek,
+    describe = list(
+      "aria-description" = gsub("%series_id%", series_id, base_meta$content$metadata$describe$`aria-description`)
+    )
   )
 
   published <- dw_publish_chart(chart$id, return_object = TRUE)
