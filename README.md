@@ -14,7 +14,7 @@ A complete list of [DatawRappr functions can be found here](https://munichrocker
 ## Getting started
 
 ### For Axions
-Copy this repo using the `new-project-generator` [script](https://github.com/axiosvisuals/new-project-shell).
+Copy this repo using the `new-project-generator` [script](https://github.com/axiosvisuals/new-project-generator).
 
 ### For everyone else, use degit
 
@@ -81,7 +81,7 @@ To source any of the R scripts, run `./batch.sh` and follow the prompts. Continu
 
 You can test out the script with the included dummy data. This will duplicate a template chart in the `Axios Visuals/batches/demo/` folder in Datawrapper (assuming it wasn't accidentally deleted), update the new charts with the dummy data, and place them in the testing folder.
 
-- Copy the repo using the `new-project-generator` [script](https://github.com/axiosvisuals/new-project-shell) or with degit
+- Copy the repo using the `new-project-generator` [script](https://github.com/axiosvisuals/new-project-generator) or with degit
   - ```
     npx degit axiosvisuals/batch-datawrapper-generator --mode=git project-name
     cd project-name`
